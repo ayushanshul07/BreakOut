@@ -1,0 +1,3 @@
+/Users/ayushanshul07/BreakOut/build/CMakeFiles/App.dir
+/Users/ayushanshul07/BreakOut/build/CMakeFiles/edit_cache.dir
+/Users/ayushanshul07/BreakOut/build/CMakeFiles/rebuild_cache.dir
