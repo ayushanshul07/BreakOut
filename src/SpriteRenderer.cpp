@@ -1,11 +1,11 @@
 
 #include "SpriteRenderer.hpp"
+#include "Texture.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
-SpriteRenderer::SpriteRenderer(Shader* shader, Texture* texture)
+SpriteRenderer::SpriteRenderer(std::string shaderPath, std::string texturePath):
+    shader(shaderPath), texture(texturePath)
 {
-    this->shader = shader;
-    this->texture = texture;
     this->initRenderData();
 }
 
@@ -17,8 +17,8 @@ SpriteRenderer::~SpriteRenderer()
 void SpriteRenderer::Draw(glm::mat4 projection, glm::vec2 position,
         glm::vec2 size, float rotate, glm::vec3 color)
 {
-    this->shader->Bind();
-    this->texture->Bind();
+    shader.Bind();
+    texture.Bind();
 
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(position, 0.0f));
@@ -29,9 +29,9 @@ void SpriteRenderer::Draw(glm::mat4 projection, glm::vec2 position,
 
     model = glm::scale(model, glm::vec3(size, 1.0f));
 
-    this->shader->SetUniformMatrix4fv("model", glm::value_ptr(model));
-    this->shader->SetUniformMatrix4fv("projection", glm::value_ptr(projection));
-    this->shader->SetUniform3f("spriteColor", color.x, color.y, color.z);
+    shader.SetUniformMatrix4fv("model", glm::value_ptr(model));
+    shader.SetUniformMatrix4fv("projection", glm::value_ptr(projection));
+    shader.SetUniform3f("spriteColor", color.x, color.y, color.z);
     
 
     this->VAO.Bind();

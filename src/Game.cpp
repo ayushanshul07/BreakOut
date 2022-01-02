@@ -17,8 +17,8 @@ void Game::Init() {
   shaderPath += "web/";
 #endif
   renderer =
-      new SpriteRenderer(new Shader(shaderPath + "BasicShader.shader"),
-                         new Texture("../assets/textures/awesomeface.png"));
+      new SpriteRenderer(shaderPath + "BasicShader.shader",
+                         "../assets/textures/awesomeface.png");
 }
 
 void Game::ProcessInput(float dt) {}

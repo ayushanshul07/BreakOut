@@ -21,7 +21,7 @@
 class SpriteRenderer 
 {
     public:
-        SpriteRenderer(Shader* shader, Texture* texture);
+        SpriteRenderer(std::string shaderPath, std::string texturePath);
         ~SpriteRenderer();
 
         void Draw(glm::mat4 projection, glm::vec2 position,
@@ -29,8 +29,8 @@ class SpriteRenderer
                 glm::vec3 color = glm::vec3(1.0f));
 
     private:
-        Shader* shader;
-        Texture* texture;
+        Shader shader;
+        Texture texture;
         VertexArray VAO;
 
         void initRenderData();
