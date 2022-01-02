@@ -1,26 +1,26 @@
 #shader vertex
 #version 330 core
-layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec2 aTexCoord ;
-out vec2 texCoord;
+layout (location = 0) in vec4 vertex; // <vec2 position, vec2 texCoords>
+
+out vec2 TexCoords;
+
 uniform mat4 model;
-uniform mat4 view;
 uniform mat4 projection;
+
 void main()
 {
-    gl_Position = projection * view * model *vec4(aPos, 1.0);
-    texCoord = aTexCoord;
+    TexCoords = vertex.zw;
+    gl_Position = projection * model * vec4(vertex.xy, 0.0, 1.0);
 }
-
 #shader fragment    
 #version 330 core
-out vec4 FragColor;
+in vec2 TexCoords;
+out vec4 color;
 
-in vec2 texCoord;
-
-uniform sampler2D ourTexture;
+uniform sampler2D image;
+uniform vec3 spriteColor;
 
 void main()
-{
-    FragColor = texture(ourTexture, texCoord);
-}
+{    
+    color = vec4(spriteColor, 1.0) * texture(image, TexCoords);
+}  

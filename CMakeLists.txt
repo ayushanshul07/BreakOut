@@ -18,7 +18,8 @@ set(SRC_FILES
     ${CMAKE_SOURCE_DIR}/src/VertexArray.cpp
     ${CMAKE_SOURCE_DIR}/src/VertexBuffer.cpp
     ${CMAKE_SOURCE_DIR}/src/VertexBufferLayout.cpp
-    ${CMAKE_SOURCE_DIR}/src/Game.cpp)
+    ${CMAKE_SOURCE_DIR}/src/Game.cpp
+    ${CMAKE_SOURCE_DIR}/src/SpriteRenderer.cpp)
 
 add_executable(App ${SRC_FILES})
 
