@@ -32,6 +32,7 @@ class Game
         unsigned int Width, Height;
         std::unique_ptr<GameLevel> GameLevelPtr;
         std::unique_ptr<Paddle> Player;
+        std::unique_ptr<Ball> Sponge;
 
         ~Game();
 

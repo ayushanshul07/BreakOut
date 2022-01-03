@@ -23,7 +23,8 @@ set(SRC_FILES
     ${CMAKE_SOURCE_DIR}/src/GameLevel.cpp
     ${CMAKE_SOURCE_DIR}/src/GameObject.cpp
     ${CMAKE_SOURCE_DIR}/src/Brick.cpp
-    ${CMAKE_SOURCE_DIR}/src/Paddle.cpp)
+    ${CMAKE_SOURCE_DIR}/src/Paddle.cpp
+    ${CMAKE_SOURCE_DIR}/src/Ball.cpp)
 
 add_executable(App ${SRC_FILES})
 
