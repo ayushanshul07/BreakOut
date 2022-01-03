@@ -3,6 +3,15 @@
 #ifndef Game_hpp
 #define Game_hpp
 
+#include <memory>
+
+#include "GameLevel.hpp"
+#include "Paddle.hpp"
+#include "Brick.hpp"
+#include "Ball.hpp"
+
+#include <GLFW/glfw3.h>
+
 enum GameState{
   GAME_ACTIVE,
   GAME_MENU,
@@ -12,12 +21,18 @@ enum GameState{
 class Game
 {
 
+    private:
+        Game(unsigned int width, unsigned int height, unsigned int level);
+        static Game* instance;
     public:
         GameState State;
         bool Keys[1024];
+        static Game* getInstance();
+        unsigned int Level;
         unsigned int Width, Height;
+        std::unique_ptr<GameLevel> GameLevelPtr;
+        std::unique_ptr<Paddle> Player;
 
-        Game(unsigned int width, unsigned int height);
         ~Game();
 
         void Init();

@@ -19,7 +19,11 @@ set(SRC_FILES
     ${CMAKE_SOURCE_DIR}/src/VertexBuffer.cpp
     ${CMAKE_SOURCE_DIR}/src/VertexBufferLayout.cpp
     ${CMAKE_SOURCE_DIR}/src/Game.cpp
-    ${CMAKE_SOURCE_DIR}/src/SpriteRenderer.cpp)
+    ${CMAKE_SOURCE_DIR}/src/SpriteRenderer.cpp
+    ${CMAKE_SOURCE_DIR}/src/GameLevel.cpp
+    ${CMAKE_SOURCE_DIR}/src/GameObject.cpp
+    ${CMAKE_SOURCE_DIR}/src/Brick.cpp
+    ${CMAKE_SOURCE_DIR}/src/Paddle.cpp)
 
 add_executable(App ${SRC_FILES})
 
@@ -38,8 +42,8 @@ target_include_directories(App PUBLIC ${CMAKE_SOURCE_DIR}/include
 
 target_link_libraries(App PUBLIC ${LIB_OPENGL})
 
+target_compile_options(App PUBLIC -O0 -g)
 if(EMSCRIPTEN)
-target_compile_options(App PUBLIC -g)
 target_link_options(
     App
   PUBLIC

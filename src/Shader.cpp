@@ -28,7 +28,7 @@ ShaderSource Shader::GetShaderSource(std::string& filePath){
     
     std::ifstream stream(filePath);
     std::stringstream ss[2];
-    
+     
     enum class ShaderType{
         NONE = -1,
         VERTEX = 0,

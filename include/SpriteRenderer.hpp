@@ -7,6 +7,7 @@
 #include "VertexArray.hpp"
 #include "VertexBuffer.hpp"
 #include "VertexBufferLayout.hpp"
+#include "GameObject.hpp"
 
 #include "glm/ext/matrix_transform.hpp"
 #include "glm/ext/quaternion_transform.hpp"
@@ -21,18 +22,16 @@
 class SpriteRenderer 
 {
     public:
-        SpriteRenderer(std::string shaderPath, std::string texturePath);
         ~SpriteRenderer();
 
-        void Draw(glm::mat4 projection, glm::vec2 position,
-                glm::vec2 size = glm::vec2(10.0f, 10.0f), float rotate = 0.0f, 
-                glm::vec3 color = glm::vec3(1.0f));
+        static SpriteRenderer* getInstance();
+
+        void Draw(GameObject* game_object, glm::mat4 projection);
 
     private:
-        Shader shader;
-        Texture texture;
+        SpriteRenderer();
         VertexArray VAO;
-
+        static SpriteRenderer* instance;
         void initRenderData();
 };
 

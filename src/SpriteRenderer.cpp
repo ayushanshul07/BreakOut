@@ -3,10 +3,20 @@
 #include "Texture.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
-SpriteRenderer::SpriteRenderer(std::string shaderPath, std::string texturePath):
-    shader(shaderPath), texture(texturePath)
+#include <iostream>
+
+SpriteRenderer::SpriteRenderer()
 {
     this->initRenderData();
+}
+
+SpriteRenderer* SpriteRenderer::instance = nullptr;
+
+SpriteRenderer* SpriteRenderer::getInstance()
+{
+    if(instance) return instance;
+    instance = new SpriteRenderer();
+    return instance;
 }
 
 SpriteRenderer::~SpriteRenderer()
@@ -14,24 +24,23 @@ SpriteRenderer::~SpriteRenderer()
     
 }
 
-void SpriteRenderer::Draw(glm::mat4 projection, glm::vec2 position,
-        glm::vec2 size, float rotate, glm::vec3 color)
+void SpriteRenderer::Draw(GameObject* game_object, glm::mat4 projection)
 {
-    shader.Bind();
-    texture.Bind();
+    game_object->texture->Bind();
+    game_object->shader->Bind();
 
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(position, 0.0f));
+    model = glm::translate(model, glm::vec3(game_object->Position, 0.0f));
 
-    model = glm::translate(model, glm::vec3(0.5f * size.x, 0.5* size.y, 0.0f) );
-    model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f));
-    model = glm::translate(model, glm::vec3(-0.5 * size.x, -0.5 * size.y, 0.0f));
+    model = glm::translate(model, glm::vec3(0.5f * game_object->Size.x, 0.5 * game_object->Size.y, 0.0f) );
+    model = glm::rotate(model, glm::radians(game_object->Rotation), glm::vec3(0.0f, 0.0f, 1.0f));
+    model = glm::translate(model, glm::vec3(-0.5f * game_object->Size.x, -0.5 * game_object->Size.y, 0.0f) );
 
-    model = glm::scale(model, glm::vec3(size, 1.0f));
+    model = glm::scale(model, glm::vec3(game_object->Size, 1.0f));
 
-    shader.SetUniformMatrix4fv("model", glm::value_ptr(model));
-    shader.SetUniformMatrix4fv("projection", glm::value_ptr(projection));
-    shader.SetUniform3f("spriteColor", color.x, color.y, color.z);
+    game_object->shader->SetUniformMatrix4fv("model", glm::value_ptr(model));
+    game_object->shader->SetUniformMatrix4fv("projection", glm::value_ptr(projection));
+    game_object->shader->SetUniform3f("spriteColor", game_object->Color.x, game_object->Color.y, game_object->Color.z);
     
 
     this->VAO.Bind();
