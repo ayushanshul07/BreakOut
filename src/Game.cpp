@@ -58,7 +58,7 @@ void Game::ProcessInput(float dt)
     {
         float velocity = PADDLE_VELOCITY * dt;
         // move playerboard
-        if (this->Keys[GLFW_KEY_A])
+        if (this->Keys[GLFW_KEY_A] || this->Keys[GLFW_KEY_LEFT])
         {
             if (Player->Position.x >= 0.0f)
             {
@@ -67,7 +67,7 @@ void Game::ProcessInput(float dt)
                     Sponge->Position.x -= velocity;
             }
         }
-        if (this->Keys[GLFW_KEY_D])
+        if (this->Keys[GLFW_KEY_D] || this->Keys[GLFW_KEY_RIGHT])
         {
             if (Player->Position.x <= this->Width - Player->Size.x)
             {
