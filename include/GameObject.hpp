@@ -14,7 +14,7 @@ class GameObject
         glm::vec3 Color;
         float Rotation;
         bool isSolid;
-        bool destroyed;
+        bool Destroyed;
         glm::mat4 model;
 
         std::shared_ptr<Texture> texture;

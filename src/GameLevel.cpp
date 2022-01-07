@@ -87,7 +87,7 @@ void GameLevel::Init(std::vector<std::vector<unsigned int>> tileData, unsigned i
                 glm::vec2 pos(unit_width * x, unit_height * y);
                 glm::vec2 size(unit_width, unit_height);
                 std::unique_ptr<Brick> brickp(new Brick(pos, size, color, common_shader, breakable_brick));
-                brickp->isSolid = true;
+                brickp->isSolid = false;
                 this->objects.push_back(std::move(brickp));
             }
         }
@@ -101,8 +101,9 @@ void GameLevel::Init(std::vector<std::vector<unsigned int>> tileData, unsigned i
 
 void GameLevel::Draw(glm::mat4 projection)
 {
-    for(auto& obj: objects){
-        if(!obj->destroyed) obj->Draw(projection);
 
+    for(int i = 0; i < objects.size(); ++i){
+        if(!objects[i]->Destroyed) objects[i]->Draw(projection);
     }
+
 }
